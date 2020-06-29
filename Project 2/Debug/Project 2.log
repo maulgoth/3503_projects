@@ -9,7 +9,5 @@ C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Pr
 C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(430,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
 C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(438,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
 C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(446,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-  main.cpp
-  Generating Code...
 C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(50): warning C4715: 'HelperMethods::readFile': not all control paths return a value
   Project 2.vcxproj -> C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\Debug\Project 2.exe

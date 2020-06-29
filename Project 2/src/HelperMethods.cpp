@@ -479,9 +479,9 @@ vector<Image> HelperMethods::SepRGB(Image& top) {
 		unsigned char red = pTop.GetRGB(0);
 		unsigned char green = pTop.GetRGB(1);
 		unsigned char blue = pTop.GetRGB(2);
-		Pixel redP = Pixel(red, 0, 0);
-		Pixel greenP = Pixel(0, green, 0);
-		Pixel blueP = Pixel(0, 0, blue);
+		Pixel redP = Pixel(red, red, red);
+		Pixel greenP = Pixel(green, green, green);
+		Pixel blueP = Pixel(blue, blue, blue);
 		// PUSH LAYERS
 		temp.at(0).AddPixel(redP);
 		temp.at(1).AddPixel(greenP);
