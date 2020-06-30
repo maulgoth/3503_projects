@@ -1,13 +1,18 @@
 ﻿  HelperMethods.cpp
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(204,46): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(293,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(335,26): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(343,26): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(381,26): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(387,26): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(393,26): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(430,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(438,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(446,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(50): warning C4715: 'HelperMethods::readFile': not all control paths return a value
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(187,46): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(272,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(313,26): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(321,26): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(356,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(360,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(364,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(398,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(406,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(414,25): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+  Image.cpp
+  main.cpp
+  Pixel.cpp
+  Generating Code...
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\Pixel.cpp(22): warning C4715: 'Pixel::GetRGB': not all control paths return a value
+C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\src\HelperMethods.cpp(49): warning C4715: 'HelperMethods::readFile': not all control paths return a value
   Project 2.vcxproj -> C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\Debug\Project 2.exe

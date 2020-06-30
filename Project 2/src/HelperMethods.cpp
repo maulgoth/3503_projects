@@ -44,9 +44,8 @@ Image HelperMethods::readFile(string path) {
 		file.close();
 		return img;
 	}
-	else {
+	else
 		cout << "Never triggered" << endl; /////////////////////
-	}
 }
 
 // Write File
@@ -74,9 +73,8 @@ bool HelperMethods::writeFile(string path, Image& img) {
 		for (int i = 0; i < img.GetPixelVectorCount(); ++i) {
 			unsigned char rgb[3];
 			Pixel p = img.GetIndPixel(i);
-			for (int j = 0; j < 3; ++j) {
+			for (int j = 0; j < 3; ++j)
 				rgb[j] = p.GetRGB(j);
-			}
 			// TGA file uses BGR instead of RGB:
 			file.write((char*)&rgb[2], sizeof(rgb[2]));
 			file.write((char*)&rgb[1], sizeof(rgb[1]));
@@ -103,49 +101,36 @@ bool HelperMethods::CompareImages(string first, string second) {
 	cout << "Pixels: " << FirstImage.GetPixelVectorCount() << " vs. " << SecondImage.GetPixelVectorCount() << endl;
 
 	// Test HEADER
-	if (FirstImage.GetHeader().idLength != SecondImage.GetHeader().idLength) {
+	if (FirstImage.GetHeader().idLength != SecondImage.GetHeader().idLength)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().colorMapType != SecondImage.GetHeader().colorMapType) {
+	if (FirstImage.GetHeader().colorMapType != SecondImage.GetHeader().colorMapType)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().dataTypeCode != SecondImage.GetHeader().dataTypeCode) {
+	if (FirstImage.GetHeader().dataTypeCode != SecondImage.GetHeader().dataTypeCode)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().colorMapOrigin != SecondImage.GetHeader().colorMapOrigin) {
+	if (FirstImage.GetHeader().colorMapOrigin != SecondImage.GetHeader().colorMapOrigin)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().colorMapLength != SecondImage.GetHeader().colorMapLength) {
+	if (FirstImage.GetHeader().colorMapLength != SecondImage.GetHeader().colorMapLength)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().colorMapDepth != SecondImage.GetHeader().colorMapDepth) {
+	if (FirstImage.GetHeader().colorMapDepth != SecondImage.GetHeader().colorMapDepth)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().xOrigin != SecondImage.GetHeader().xOrigin) {
+	if (FirstImage.GetHeader().xOrigin != SecondImage.GetHeader().xOrigin)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().yOrigin != SecondImage.GetHeader().yOrigin) {
+	if (FirstImage.GetHeader().yOrigin != SecondImage.GetHeader().yOrigin)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().width != SecondImage.GetHeader().width) {
+	if (FirstImage.GetHeader().width != SecondImage.GetHeader().width)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().height != SecondImage.GetHeader().height) {
+	if (FirstImage.GetHeader().height != SecondImage.GetHeader().height)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().bitsPerPixel != SecondImage.GetHeader().bitsPerPixel) {
+	if (FirstImage.GetHeader().bitsPerPixel != SecondImage.GetHeader().bitsPerPixel)
 		HeaderErrors++;
-	}
-	if (FirstImage.GetHeader().imageDescriptor != SecondImage.GetHeader().imageDescriptor) {
+	if (FirstImage.GetHeader().imageDescriptor != SecondImage.GetHeader().imageDescriptor)
 		HeaderErrors++;
-	}
 
 	// TEST ALL PIXELS
 	for (int i = 0; i < FirstImage.GetPixelVectorCount(); ++i) {
 		for (int j = 0; i < 3; ++i) {
-			if (FirstImage.GetPixels().at(i).GetRGB(j) != SecondImage.GetPixels().at(i).GetRGB(j)) {
+			if (FirstImage.GetPixels().at(i).GetRGB(j) != SecondImage.GetPixels().at(i).GetRGB(j))
 				PixelErrors++;
-			}
 		}
 	}
 
@@ -191,18 +176,15 @@ Image HelperMethods::Multiply(Image& top, Image& bottom) {
 		for (int j = 0; j < 6; ++j) {
 			if (j < 3)
 				rgb[j] = NormChar(pTop.GetRGB(j), global_max, global_min);
-			else {
+			else
 				rgb[j] = NormChar(pBot.GetRGB(j - 3), global_max, global_min);
-			}
 		}
 		// Multiply RGBs
 		for (int j = 0; j < 3; ++j) {
-			if (rgb[j] * rgb[j + 3] > 1) {
+			if (rgb[j] * rgb[j + 3] > 1)
 				rgbTemp[j] = global_max;
-			}
-			else {
+			else
 				rgbTemp[j] = (rgb[j] * rgb[j + 3]) * 255 + 0.5f;
-			}
 		}
 		// Add Pixel to Temp
 		Pixel p = Pixel(rgbTemp[0], rgbTemp[1], rgbTemp[2]);
@@ -241,12 +223,10 @@ Image HelperMethods::Subtract(Image& top, Image& bottom) {
 		}
 		// Sub RGBs
 		for (int j = 0; j < 3; ++j) {
-			if (rgb[j+3] - rgb[j] < 0) {
+			if (rgb[j+3] - rgb[j] < 0)
 				rgbTemp[j] = global_min;
-			}
-			else {
+			else
 				rgbTemp[j] = (rgb[j+3] - rgb[j]);
-			}
 		}
 		// Add Pixel to Temp
 		Pixel p = Pixel(rgbTemp[0], rgbTemp[1], rgbTemp[2]);
@@ -279,9 +259,8 @@ Image HelperMethods::Screen(Image& top, Image& bottom, Image& screen) {
 		for (int j = 0; j < 6; ++j) {
 			if (j < 3)
 				rgb[j] = NormChar(pTop.GetRGB(j), global_max, global_min);
-			else {
+			else
 				rgb[j] = NormChar(pBot.GetRGB(j - 3), global_max, global_min);
-			}
 		}
 		// Multiply RGBs
 		for (int j = 0; j < 3; ++j) {
@@ -322,9 +301,8 @@ Image HelperMethods::Overlay(Image& top, Image& bottom) {
 		for (int j = 0; j < 6; ++j) {
 			if (j < 3)
 				rgb[j] = NormChar(pTop.GetRGB(j), global_max, global_min);
-			else {
+			else
 				rgb[j] = NormChar(pBot.GetRGB(j - 3), global_max, global_min);
-			}
 		}
 		// Multiply RGBs
 		for (int j = 0; j < 3; ++j) {
@@ -363,36 +341,27 @@ Image HelperMethods::AddRGB(Image& top, unsigned char red, unsigned char green, 
 	PrintInfo(top);
 	PrintInfo(img);
 
-	// Overlay each pixel
+	// ADD RGB Each Pixel
 	for (int i = 0; i < top.GetPixelVectorCount(); ++i) {
 		Pixel pTop = top.GetIndPixel(i);
 		float rgb[3];
 		unsigned char rgbTemp[3];
 		// Fill RGBs
-		for (int j = 0; j < 3; ++j) {
+		for (int j = 0; j < 3; ++j)
 			rgb[j] = NormChar(pTop.GetRGB(j), global_max, global_min);
-		}
-		// Add RGB
-		for (int j = 0; j < 3; ++j) {
-			if (j == 0) {
-				float a = rgb[j] + NormChar(red, global_max, global_min);
-				if (a > 1)
-					a = 1;
-				rgbTemp[j] = a * 255 + 0.5f;
-			}
-			if (j == 1) {
-				float a = rgb[j] + NormChar(green, global_max, global_min);
-				if (a > 1)
-					a = 1;
-				rgbTemp[j] = a * 255 + 0.5f;
-			}
-			if (j == 2) {
-				float a = rgb[j] + NormChar(blue, global_max, global_min);
-				if (a > 1)
-					a = 1;
-				rgbTemp[j] = a * 255 + 0.5f;
-			}
-		}
+		// Add RGBs
+			float a = rgb[0] + NormChar(red, global_max, global_min);
+			if (a > 1)
+				a = 1;
+			rgbTemp[0] = a * 255 + 0.5f;
+			a = rgb[1] + NormChar(green, global_max, global_min);
+			if (a > 1)
+				a = 1;
+			rgbTemp[1] = a * 255 + 0.5f;
+			a = rgb[2] + NormChar(blue, global_max, global_min);
+			if (a > 1)
+				a = 1;
+			rgbTemp[2] = a * 255 + 0.5f;
 		// Add Pixel to Temp
 		Pixel p = Pixel(rgbTemp[0], rgbTemp[1], rgbTemp[2]);
 		img.AddPixel(p);
@@ -419,9 +388,8 @@ Image HelperMethods::Scale(Image& top, bool red, float x, bool green, float y, b
 		unsigned char rgb[3];
 		unsigned char rgbTemp[3];
 		// Fill RGBs
-		for (int j = 0; j < 3; ++j) {
+		for (int j = 0; j < 3; ++j)
 			rgb[j] = pTop.GetRGB(j);
-		}
 		// Scale Selected Colors (Char, not Floats)
 		if (red == 1) {
 			if (rgb[0] * x > global_max)
@@ -487,10 +455,36 @@ vector<Image> HelperMethods::SepRGB(Image& top) {
 		temp.at(1).AddPixel(greenP);
 		temp.at(2).AddPixel(blueP);
 	}
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < 3; ++i)
 		cout << temp.at(i).GetPixelVectorCount() << endl;
+	return temp;
+}
+
+Image HelperMethods::Combine(Image& red, Image& green, Image& blue) {
+	// Load Images, Create Temp
+	Image img = Image(red.GetHeader());
+
+	// Temporary DEBUG PRINTS ///////////////////// DELETE ME ///////////
+	PrintInfo(red);
+	PrintInfo(green);
+	PrintInfo(blue);
+	PrintInfo(img);
+
+	// Combine Each Pixel
+	for (int i = 0; i < red.GetPixelVectorCount(); ++i) {
+		unsigned char rgb[3];
+		// Fill RGBs
+		rgb[0] = red.GetIndPixel(i).GetRGB(0);
+		rgb[1] = green.GetIndPixel(i).GetRGB(0);
+		rgb[2] = blue.GetIndPixel(i).GetRGB(0);
+
+		// Add Pixel to Temp
+		Pixel p = Pixel(rgb[0], rgb[1], rgb[2]);
+		img.AddPixel(p);
 	}
 
-	return temp;
+	// DEBUG ERASE ME PRINT PIXEL COUNT ----------------------------------
+	cout << "Temp Pixels: " << img.GetPixelVectorCount() << endl;
 
+	return img;
 }

@@ -14,6 +14,8 @@ int main()
 	int count = 0;
 	int test = 0;
 
+	//test = 1;
+
 	if (test == 1) {
 		cout << "\nTest 1 Starting... ------------------------/" << endl;
 
@@ -153,7 +155,7 @@ int main()
 				cout << "Test 7: Fail." << endl;
 	}
 
-	test = 8;
+	//test = 8;
 
 	if (test == 8) {
 		cout << "\nTest 8 Starting... ------------------------/" << endl;
@@ -195,6 +197,27 @@ int main()
 		}
 		else
 			cout << "Test 8: Fail." << endl;
+	}
+
+	test = 9;
+
+	if (test == 9) {
+		cout << "\nTest 9 Starting... ------------------------/" << endl;
+
+		// Load Images
+		Image top9red = readFile("input/layer_red.tga");
+		Image top9green = readFile("input/layer_green.tga");
+		Image top9blue = readFile("input/layer_blue.tga");
+
+		// ADD GREEN
+		Image Test9 = Combine(top9red, top9green, top9blue);
+		if (writeFile("tests/test9.tga", Test9) == 1)
+			if (CompareImages("tests/test9.tga", "examples/EXAMPLE_part9.tga") == 1) {
+				count++;
+				cout << "Test 9: Passed." << endl;
+			}
+			else
+				cout << "Test 9: Fail." << endl;
 	}
 
 	cout << "\n\nQuitting now! " << count << "/10 Tests Passed.\nExtra Credit? Not yet.\n" << endl; /////////////////////
