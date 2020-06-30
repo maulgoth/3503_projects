@@ -4,21 +4,23 @@
 #include <string>
 #include <vector>
 #include "HelperMethods.h"
+#include "SimpleTimer.h"
 using namespace std;
 using namespace HelperMethods;
 
 int main()
 {
+	SimpleTimer timer("New");
 	cout << "Starting Image Editor: " << endl;
-	// 1
+	// 1 /////////////////////////////////////////////////
 	// Image Paths
 	Image top1 = readFile("input/layer1.tga");
 	Image bottom1 = readFile("input/pattern1.tga");
 	// Multiply
 	Image Test1 = Multiply(top1, bottom1);
 	writeFile("output/part1.tga", Test1);
-			
-	// 2
+	
+	// 2 /////////////////////////////////////////////////
 	// Load Images
 	Image top2 = readFile("input/layer2.tga");
 	Image bottom2 = readFile("input/car.tga");
@@ -27,7 +29,7 @@ int main()
 	Image Test2 = Subtract(top2, bottom2);
 	writeFile("output/part2.tga", Test2);
 			
-	// 3
+	// 3 /////////////////////////////////////////////////
 	// Load Images
 	Image top3 = readFile("input/layer1.tga");
 	Image bottom3 = readFile("input/pattern2.tga");
@@ -37,7 +39,7 @@ int main()
 	Image Test3 = Screen(top3, bottom3, screen);
 	writeFile("output/part3.tga", Test3);
 			
-	// 4
+	// 4 /////////////////////////////////////////////////
 	// Load Images
 	Image top4 = readFile("input/layer2.tga");
 	Image bottom4 = readFile("input/circles.tga");
@@ -48,7 +50,7 @@ int main()
 	Image Test4 = Subtract(sub, Test4TempImg);
 	writeFile("output/part4.tga", Test4);
 			
-	// 5
+	// 5 /////////////////////////////////////////////////
 	// Load Images
 	Image top5 = readFile("input/layer1.tga");
 	Image bottom5 = readFile("input/pattern1.tga");
@@ -57,7 +59,7 @@ int main()
 	Image Test5 = Overlay(top5, bottom5);
 	writeFile("output/part5.tga", Test5);
 			
-	// 6
+	// 6 /////////////////////////////////////////////////
 	// Load Images
 	Image top6 = readFile("input/car.tga");
 
@@ -65,7 +67,7 @@ int main()
 	Image Test6 = AddRGB(top6, 0, 200, 0);
 	writeFile("output/part6.tga", Test6);
 
-	// 7
+	// 7 /////////////////////////////////////////////////
 	// Load Images
 	Image top7 = readFile("input/car.tga");
 
@@ -73,7 +75,7 @@ int main()
 	Image Test7 = Scale(top7, true, 4.0, false, 0.0, true, 0.0);
 	writeFile("output/part7.tga", Test7);
 			
-	// 8
+	// 8 /////////////////////////////////////////////////
 	// Load Images
 	Image top8 = readFile("input/car.tga");
 
@@ -86,7 +88,7 @@ int main()
 				
 	writeFile("output/part8_b.tga", Test8.at(2));
 			
-	// 9
+	// 9 /////////////////////////////////////////////////
 	// Load Images
 	Image top9red = readFile("input/layer_red.tga");
 	Image top9green = readFile("input/layer_green.tga");
@@ -95,8 +97,8 @@ int main()
 	// COMBINE
 	Image Test9 = Combine(top9red, top9green, top9blue);
 	writeFile("output/part9.tga", Test9);
-			
-	// 10
+
+	// 10 ////////////////////////////////////////////////
 	// Load Images
 	Image top10 = readFile("input/text2.tga");
 
@@ -104,6 +106,17 @@ int main()
 	Image Test10 = Rotate180(top10);
 	writeFile("output/part10.tga", Test10);
 
+	// EXTRA CREDIT //////////////////////////////////////
+	// Load Images
+	Image topX1 = readFile("input/car.tga");
+	Image topX2 = readFile("input/circles.tga");
+	Image topX3 = readFile("input/pattern1.tga");
+	Image topX4 = readFile("input/text.tga");
+
+	// Quadrant
+	Image TestExtraCredit = Quadrant(topX1, topX2, topX3, topX4);
+
+	// EXIT //////////////////////////////////////////////
 	cout << "All tasks complete. Thank you." << endl;
 
 	return 0;

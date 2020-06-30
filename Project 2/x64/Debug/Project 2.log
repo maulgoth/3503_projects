@@ -1,5 +1,0 @@
-﻿  HelperMethods.cpp
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\HelperMethods.cpp(181,9): warning C4101: 'rgbTB': unreferenced local variable
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\HelperMethods.cpp(180,17): warning C4101: 'rgb': unreferenced local variable
-C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\HelperMethods.cpp(50): warning C4715: 'HelperMethods::readFile': not all control paths return a value
-LINK : fatal error LNK1201: error writing to program database 'C:\Users\maulgoth\Google Drive\COLLEGE\SUMMER 2020\COP 3503\Labs and Projects\Projects\Project 2\x64\Debug\Project 2.pdb'; check for insufficient disk space, invalid path, or insufficient privilege

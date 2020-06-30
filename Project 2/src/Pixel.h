@@ -5,7 +5,7 @@ using namespace std;
 class Pixel {
 public:
 	Pixel(unsigned char r, unsigned char g, unsigned char b);
-	unsigned char GetRGB(int x);
+	const unsigned char GetRGB(int x) const;
 private:
 	unsigned char red;
 	unsigned char green;

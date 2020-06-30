@@ -23,14 +23,13 @@
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Pixel.cpp" />
+    <ClCompile Include="src\SimpleTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\HelperMethods.h" />
     <ClInclude Include="src\Image.h" />
     <ClInclude Include="src\Pixel.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="src\readme.txt" />
+    <ClInclude Include="src\SimpleTimer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -45,7 +45,7 @@ Image HelperMethods::readFile(string path) {
 		return img;
 	}
 	//
-	cout << "Never triggered" << endl; /////////////////////
+	cout << "Could not load: '" << path << "'. Sorry!" << endl; /////////////////////
 	return Image();
 }
 
@@ -129,7 +129,7 @@ bool HelperMethods::CompareImages(string first, string second) {
 	// TEST ALL PIXELS
 	for (int i = 0; i < FirstImage.GetPixelVectorCount(); ++i) {
 		for (int j = 0; i < 3; ++i) {
-			if (FirstImage.GetPixels().at(i).GetRGB(j) != SecondImage.GetPixels().at(i).GetRGB(j))
+			if (FirstImage.GetIndPixel(i).GetRGB(j) != SecondImage.GetIndPixel(i).GetRGB(j))
 				PixelErrors++;
 		}
 	}
@@ -156,7 +156,7 @@ float HelperMethods::NormChar(unsigned char c, unsigned char top, unsigned char 
 }
 
 // Multiply
-Image HelperMethods::Multiply(Image& top, Image& bottom) {
+Image HelperMethods::Multiply(const Image& top, const Image& bottom) {
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
 
@@ -191,8 +191,9 @@ Image HelperMethods::Multiply(Image& top, Image& bottom) {
 	return img;
 }
 
+
 // Subtract
-Image HelperMethods::Subtract(Image& top, Image& bottom) {
+Image HelperMethods::Subtract(const Image& top, const Image& bottom) {
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
 
@@ -227,7 +228,7 @@ Image HelperMethods::Subtract(Image& top, Image& bottom) {
 	return img;
 }
 
-Image HelperMethods::Screen(Image& top, Image& bottom, Image& screen) {
+Image HelperMethods::Screen(const Image& top, const Image& bottom, const Image& screen) {
 	// Load Images, Create Temp
 	Image temp = Multiply(top, bottom);
 	Image img = Image(temp.GetHeader());
@@ -265,7 +266,7 @@ Image HelperMethods::Screen(Image& top, Image& bottom, Image& screen) {
 	return img;
 }
 
-Image HelperMethods::Overlay(Image& top, Image& bottom) {
+Image HelperMethods::Overlay(const Image& top, const Image& bottom) {
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
 
@@ -310,7 +311,7 @@ Image HelperMethods::Overlay(Image& top, Image& bottom) {
 	return img;
 }
 
-Image HelperMethods::AddRGB(Image& top, unsigned char red, unsigned char green, unsigned char blue) {
+Image HelperMethods::AddRGB(const Image& top, unsigned char red, unsigned char green, unsigned char blue) {
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
 
@@ -346,7 +347,7 @@ Image HelperMethods::AddRGB(Image& top, unsigned char red, unsigned char green, 
 	return img;
 }
 
-Image HelperMethods::Scale(Image& top, bool red, float x, bool green, float y, bool blue, float z) {
+Image HelperMethods::Scale(const Image& top, bool red, float x, bool green, float y, bool blue, float z) {
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
 
@@ -394,7 +395,7 @@ Image HelperMethods::Scale(Image& top, bool red, float x, bool green, float y, b
 	return img;
 }
 
-vector<Image> HelperMethods::SepRGB(Image& top) {
+vector<Image> HelperMethods::SepRGB(const Image& top) {
 	// Load Images, Create Temp
 	vector<Image> temp;
 	temp.push_back(Image(top.GetHeader())); // RED
@@ -420,7 +421,7 @@ vector<Image> HelperMethods::SepRGB(Image& top) {
 	return temp;
 }
 
-Image HelperMethods::Combine(Image& red, Image& green, Image& blue) {
+Image HelperMethods::Combine(const Image& red, const Image& green, const Image& blue) {
 	// Load Images, Create Temp
 	Image img = Image(red.GetHeader());
 
@@ -441,7 +442,7 @@ Image HelperMethods::Combine(Image& red, Image& green, Image& blue) {
 }
 
 
-Image HelperMethods::Rotate180(Image& top) {
+Image HelperMethods::Rotate180(const Image& top) {
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
 
@@ -455,9 +456,15 @@ Image HelperMethods::Rotate180(Image& top) {
 	return img;
 }
 
+Image HelperMethods::Quadrant(const Image& first, const Image& second, const Image& third, const Image& fourth) {
+	// Load Images, Create Temp
+	Image img = Image(first.GetHeader());
+	return img;
+}
+
 /* UNUSED! Rotates Image 90 Degrees, but needs to MODIFY
 // Header to change size:
-Image HelperMethods::Rotate90(Image& top) {
+Image HelperMethods::Rotate90(const Image& top) {
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
 
