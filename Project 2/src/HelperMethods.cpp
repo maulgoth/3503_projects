@@ -458,7 +458,53 @@ Image HelperMethods::Rotate180(const Image& top) {
 
 Image HelperMethods::Quadrant(const Image& first, const Image& second, const Image& third, const Image& fourth) {
 	// Load Images, Create Temp
-	Image img = Image(first.GetHeader());
+	int heights[4] = { first.GetHeight(), second.GetHeight(), third.GetHeight(), fourth.GetHeight() };
+	int widths[4] = { first.GetWidth(), second.GetWidth(), third.GetWidth(), fourth.GetWidth() };
+	Image::Header h = first.GetHeader();
+	h.width = widths[0] + widths[1];
+	h.height = heights[0] + heights[2];
+	Image img = Image(h);
+
+	// Counters
+	int count1 = 0;
+	int count2 = 0;
+
+	// Fill Pixels 1 & 2
+	for (int i = 0; i < heights[0]; ++i) {
+		for (int j = 0, k = 0 + count1; j < widths[0]; ++j) {
+			Pixel p = first.GetIndPixel(k);
+			img.AddPixel(p);
+			count1++;
+			k++;
+		}
+		for (int j = 0, k = 0 + count2; j < widths[1]; ++j) {
+			Pixel p = second.GetIndPixel(k);
+			img.AddPixel(p);
+			count2++;
+			k++;
+		}
+	}
+
+	// Reset counters
+	count1 = 0;
+	count2 = 0;
+
+	// Fill Pixels 3 & 4
+	for (int i = 0; i < heights[2]; ++i) {
+		for (int j = 0, k = 0 + count1; j < widths[2]; ++j) {
+			Pixel p = third.GetIndPixel(k);
+			img.AddPixel(p);
+			count1++;
+			k++;
+		}
+		for (int j = 0, k = 0 + count2; j < widths[3]; ++j) {
+			Pixel p = fourth.GetIndPixel(k);
+			img.AddPixel(p);
+			count2++;
+			k++;
+		}
+	}
+
 	return img;
 }
 

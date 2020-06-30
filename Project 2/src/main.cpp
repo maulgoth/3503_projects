@@ -1,3 +1,10 @@
+// ***************************************************** //
+// Jeremy DePoyster - COP3503 Summer 2020 - UF Online   //
+// All code completely original,					   //
+// Inspired by Professor Joshua Fox's lectures,       //
+// Or from previous COP3503 Projects and Labs        //
+// *************************************************//
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -12,6 +19,7 @@ int main()
 {
 	SimpleTimer timer("New");
 	cout << "Starting Image Editor: " << endl;
+	
 	// 1 /////////////////////////////////////////////////
 	// Image Paths
 	Image top1 = readFile("input/layer1.tga");
@@ -105,16 +113,17 @@ int main()
 	// ROTATE 180
 	Image Test10 = Rotate180(top10);
 	writeFile("output/part10.tga", Test10);
-
+	
 	// EXTRA CREDIT //////////////////////////////////////
 	// Load Images
-	Image topX1 = readFile("input/car.tga");
-	Image topX2 = readFile("input/circles.tga");
-	Image topX3 = readFile("input/pattern1.tga");
-	Image topX4 = readFile("input/text.tga");
+	Image topX3 = readFile("input/car.tga");
+	Image topX4 = readFile("input/circles.tga");
+	Image topX2 = readFile("input/pattern1.tga");
+	Image topX1 = readFile("input/text.tga");
 
 	// Quadrant
 	Image TestExtraCredit = Quadrant(topX1, topX2, topX3, topX4);
+	writeFile("output/extracredit.tga", TestExtraCredit);
 
 	// EXIT //////////////////////////////////////////////
 	cout << "All tasks complete. Thank you." << endl;
