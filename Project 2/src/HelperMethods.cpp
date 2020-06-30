@@ -44,13 +44,13 @@ Image HelperMethods::readFile(string path) {
 		file.close();
 		return img;
 	}
-	else
-		cout << "Never triggered" << endl; /////////////////////
+	//
+	cout << "Never triggered" << endl; /////////////////////
+	return Image();
 }
 
 // Write File
 bool HelperMethods::writeFile(string path, Image& img) {
-	cout << "Writing: '" << path << "'." << endl; /////////////////////
 	ofstream file(path, ios_base::binary);
 	if (file.is_open()) {
 
@@ -135,7 +135,7 @@ bool HelperMethods::CompareImages(string first, string second) {
 	}
 
 	if (PixelErrors == 0 && HeaderErrors == 0) {
-		cout << "IMAGES MATCH. o.0" << endl;
+		cout << "IMAGES MATCH. o.0 ----- Congrats." << endl;
 		return true;
 	}
 	else {
@@ -157,14 +157,8 @@ float HelperMethods::NormChar(unsigned char c, unsigned char top, unsigned char 
 
 // Multiply
 Image HelperMethods::Multiply(Image& top, Image& bottom) {
-
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
-
-	// Temporary DEBUG PRINTS ///////////////////// DELETE ME ///////////
-	PrintInfo(top);
-	PrintInfo(bottom);
-	PrintInfo(img);
 
 	// MULTIPLY EACH PIXEL
 	for (int i = 0; i < top.GetPixelVectorCount(); ++i) {
@@ -172,6 +166,7 @@ Image HelperMethods::Multiply(Image& top, Image& bottom) {
 		Pixel pBot = bottom.GetIndPixel(i);
 		float rgb[6];
 		unsigned char rgbTemp[3];
+
 		// Fill RGBs
 		for (int j = 0; j < 6; ++j) {
 			if (j < 3)
@@ -179,34 +174,27 @@ Image HelperMethods::Multiply(Image& top, Image& bottom) {
 			else
 				rgb[j] = NormChar(pBot.GetRGB(j - 3), global_max, global_min);
 		}
+
 		// Multiply RGBs
 		for (int j = 0; j < 3; ++j) {
 			if (rgb[j] * rgb[j + 3] > 1)
 				rgbTemp[j] = global_max;
 			else
-				rgbTemp[j] = (rgb[j] * rgb[j + 3]) * 255 + 0.5f;
+				rgbTemp[j] = (unsigned char)((rgb[j] * rgb[j + 3]) * 255 + 0.5f);
 		}
+
 		// Add Pixel to Temp
 		Pixel p = Pixel(rgbTemp[0], rgbTemp[1], rgbTemp[2]);
 		img.AddPixel(p);
 	}
-
-	// DEBUG ERASE ME PRINT PIXEL COUNT ----------------------------------
-	cout << "Temp Pixels: " << img.GetPixelVectorCount() << endl;
 
 	return img;
 }
 
 // Subtract
 Image HelperMethods::Subtract(Image& top, Image& bottom) {
-
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
-
-	// Temporary DEBUG PRINTS ///////////////////// DELETE ME ///////////
-	PrintInfo(top);
-	PrintInfo(bottom);
-	PrintInfo(img);
 
 	// Subtract each pixel
 	for (int i = 0; i < top.GetPixelVectorCount(); ++i) {
@@ -214,6 +202,7 @@ Image HelperMethods::Subtract(Image& top, Image& bottom) {
 		Pixel pBot = bottom.GetIndPixel(i);
 		unsigned char rgb[6];
 		unsigned char rgbTemp[3];
+
 		// Fill RGBs
 		for (int j = 0; j < 6; ++j) {
 			if (j < 3)
@@ -221,6 +210,7 @@ Image HelperMethods::Subtract(Image& top, Image& bottom) {
 			else
 				rgb[j] = pBot.GetRGB(j - 3);
 		}
+
 		// Sub RGBs
 		for (int j = 0; j < 3; ++j) {
 			if (rgb[j+3] - rgb[j] < 0)
@@ -228,26 +218,19 @@ Image HelperMethods::Subtract(Image& top, Image& bottom) {
 			else
 				rgbTemp[j] = (rgb[j+3] - rgb[j]);
 		}
+
 		// Add Pixel to Temp
 		Pixel p = Pixel(rgbTemp[0], rgbTemp[1], rgbTemp[2]);
 		img.AddPixel(p);
 	}
 
-	// DEBUG ERASE ME PRINT PIXEL COUNT ----------------------------------
-	cout << "Temp Pixels: " << img.GetPixelVectorCount() << endl;
-
 	return img;
 }
 
 Image HelperMethods::Screen(Image& top, Image& bottom, Image& screen) {
-
 	// Load Images, Create Temp
 	Image temp = Multiply(top, bottom);
 	Image img = Image(temp.GetHeader());
-
-	// Temporary DEBUG PRINTS ///////////////////// DELETE ME ///////////
-	PrintInfo(img);
-	PrintInfo(screen);
 
 	// SCREEN EACH PIXEL
 	for (int i = 0; i < screen.GetPixelVectorCount(); ++i) {
@@ -255,6 +238,7 @@ Image HelperMethods::Screen(Image& top, Image& bottom, Image& screen) {
 		Pixel pBot = temp.GetIndPixel(i);
 		float rgb[6];
 		unsigned char rgbTemp[3];
+
 		// Fill RGBs
 		for (int j = 0; j < 6; ++j) {
 			if (j < 3)
@@ -262,6 +246,7 @@ Image HelperMethods::Screen(Image& top, Image& bottom, Image& screen) {
 			else
 				rgb[j] = NormChar(pBot.GetRGB(j - 3), global_max, global_min);
 		}
+
 		// Multiply RGBs
 		for (int j = 0; j < 3; ++j) {
 			float a = 1 - (1 - rgb[j]) * (1 - rgb[j + 3]);
@@ -269,15 +254,13 @@ Image HelperMethods::Screen(Image& top, Image& bottom, Image& screen) {
 				a = 1;
 			else if (a < 0)
 				a = 0;
-			rgbTemp[j] = a * 255 + 0.5f;
+			rgbTemp[j] = (unsigned char)(a * 255 + 0.5f);
 		}
+
 		// Add Pixel to Temp
 		Pixel p = Pixel(rgbTemp[0], rgbTemp[1], rgbTemp[2]);
 		img.AddPixel(p);
 	}
-
-	// DEBUG ERASE ME PRINT PIXEL COUNT ----------------------------------
-	cout << "Temp Pixels: " << img.GetPixelVectorCount() << endl;
 
 	return img;
 }
@@ -286,17 +269,13 @@ Image HelperMethods::Overlay(Image& top, Image& bottom) {
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
 
-	// Temporary DEBUG PRINTS ///////////////////// DELETE ME ///////////
-	PrintInfo(top);
-	PrintInfo(bottom);
-	PrintInfo(img);
-
 	// Overlay each pixel
 	for (int i = 0; i < top.GetPixelVectorCount(); ++i) {
 		Pixel pTop = top.GetIndPixel(i);
 		Pixel pBot = bottom.GetIndPixel(i);
 		float rgb[6];
 		unsigned char rgbTemp[3];
+
 		// Fill RGBs
 		for (int j = 0; j < 6; ++j) {
 			if (j < 3)
@@ -304,13 +283,14 @@ Image HelperMethods::Overlay(Image& top, Image& bottom) {
 			else
 				rgb[j] = NormChar(pBot.GetRGB(j - 3), global_max, global_min);
 		}
+
 		// Multiply RGBs
 		for (int j = 0; j < 3; ++j) {
 			if (rgb[j + 3] <= 0.5) {
 				float a = 2 * rgb[j] * rgb[j + 3];
 				if (a > 1)
 					a = 1;
-				rgbTemp[j] = a * 255 + 0.5f;
+				rgbTemp[j] = (unsigned char)(a * 255 + 0.5f);
 			}
 			else {
 				float a = 1 - 2 * (1 - rgb[j]) * (1 - rgb[j + 3]);
@@ -318,84 +298,74 @@ Image HelperMethods::Overlay(Image& top, Image& bottom) {
 					a = 1;
 				else if (a < 0)
 					a = 0;
-				rgbTemp[j] = a * 255 + 0.5f;
+				rgbTemp[j] = (unsigned char)(a * 255 + 0.5f);
 			}
 		}
+
 		// Add Pixel to Temp
 		Pixel p = Pixel(rgbTemp[0], rgbTemp[1], rgbTemp[2]);
 		img.AddPixel(p);
 	}
 
-	// DEBUG ERASE ME PRINT PIXEL COUNT ----------------------------------
-	cout << "Temp Pixels: " << img.GetPixelVectorCount() << endl;
-
 	return img;
 }
 
 Image HelperMethods::AddRGB(Image& top, unsigned char red, unsigned char green, unsigned char blue) {
-
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
-
-	// Temporary DEBUG PRINTS ///////////////////// DELETE ME ///////////
-	PrintInfo(top);
-	PrintInfo(img);
 
 	// ADD RGB Each Pixel
 	for (int i = 0; i < top.GetPixelVectorCount(); ++i) {
 		Pixel pTop = top.GetIndPixel(i);
 		float rgb[3];
 		unsigned char rgbTemp[3];
+
 		// Fill RGBs
 		for (int j = 0; j < 3; ++j)
 			rgb[j] = NormChar(pTop.GetRGB(j), global_max, global_min);
+		
 		// Add RGBs
 			float a = rgb[0] + NormChar(red, global_max, global_min);
 			if (a > 1)
 				a = 1;
-			rgbTemp[0] = a * 255 + 0.5f;
+			rgbTemp[0] = (unsigned char)(a * 255 + 0.5f);
 			a = rgb[1] + NormChar(green, global_max, global_min);
 			if (a > 1)
 				a = 1;
-			rgbTemp[1] = a * 255 + 0.5f;
+			rgbTemp[1] = (unsigned char)(a * 255 + 0.5f);
 			a = rgb[2] + NormChar(blue, global_max, global_min);
 			if (a > 1)
 				a = 1;
-			rgbTemp[2] = a * 255 + 0.5f;
+			rgbTemp[2] = (unsigned char)(a * 255 + 0.5f);
+
 		// Add Pixel to Temp
 		Pixel p = Pixel(rgbTemp[0], rgbTemp[1], rgbTemp[2]);
 		img.AddPixel(p);
 	}
 
-	// DEBUG ERASE ME PRINT PIXEL COUNT ----------------------------------
-	cout << "Temp Pixels: " << img.GetPixelVectorCount() << endl;
-
 	return img;
 }
 
 Image HelperMethods::Scale(Image& top, bool red, float x, bool green, float y, bool blue, float z) {
-	
 	// Load Images, Create Temp
 	Image img = Image(top.GetHeader());
-
-	// Temporary DEBUG PRINTS ///////////////////// DELETE ME ///////////
-	PrintInfo(top);
-	PrintInfo(img);
 
 	// Scale EACH PIXEL
 	for (int i = 0; i < top.GetPixelVectorCount(); ++i) {
 		Pixel pTop = top.GetIndPixel(i);
 		unsigned char rgb[3];
 		unsigned char rgbTemp[3];
+
 		// Fill RGBs
 		for (int j = 0; j < 3; ++j)
 			rgb[j] = pTop.GetRGB(j);
+
 		// Scale Selected Colors (Char, not Floats)
 		if (red == 1) {
 			if (rgb[0] * x > global_max)
 				rgbTemp[0] = global_max;
 			else
-				rgbTemp[0] = rgb[0] * x;
+				rgbTemp[0] = (unsigned char)(rgb[0] * x);
 		}
 		else
 			rgbTemp[0] = rgb[0];
@@ -403,7 +373,7 @@ Image HelperMethods::Scale(Image& top, bool red, float x, bool green, float y, b
 			if (rgb[1] * y > global_max)
 				rgbTemp[1] = global_max;
 			else
-				rgbTemp[1] = rgb[1] * y;
+				rgbTemp[1] = (unsigned char)(rgb[1] * y);
 		}
 		else
 			rgbTemp[1] = rgb[1];
@@ -411,7 +381,7 @@ Image HelperMethods::Scale(Image& top, bool red, float x, bool green, float y, b
 			if (rgb[2] * z > global_max)
 				rgbTemp[2] = global_max;
 			else
-				rgbTemp[2] = rgb[2] * z;
+				rgbTemp[2] = (unsigned char)(rgb[2] * z);
 		}
 		else
 			rgbTemp[2] = rgb[2];
@@ -421,26 +391,16 @@ Image HelperMethods::Scale(Image& top, bool red, float x, bool green, float y, b
 		img.AddPixel(p);
 	}
 
-	// DEBUG ERASE ME PRINT PIXEL COUNT ----------------------------------
-	cout << "Temp Pixels: " << img.GetPixelVectorCount() << endl;
-
 	return img;
 }
 
 vector<Image> HelperMethods::SepRGB(Image& top) {
-
 	// Load Images, Create Temp
 	vector<Image> temp;
 	temp.push_back(Image(top.GetHeader())); // RED
 	temp.push_back(Image(top.GetHeader())); // GREEN
 	temp.push_back(Image(top.GetHeader())); // BLUE
 	
-	// Temporary DEBUG PRINTS ///////////////////// DELETE ME ///////////
-	PrintInfo(top);
-	PrintInfo(temp.at(0)); // RED
-	PrintInfo(temp.at(1)); // GREEN
-	PrintInfo(temp.at(2)); // BLUE
-
 	// SEP EACH LAYER
 	for (int i = 0; i < top.GetPixelVectorCount(); ++i) {
 		Pixel pTop = top.GetIndPixel(i);
@@ -450,25 +410,19 @@ vector<Image> HelperMethods::SepRGB(Image& top) {
 		Pixel redP = Pixel(red, red, red);
 		Pixel greenP = Pixel(green, green, green);
 		Pixel blueP = Pixel(blue, blue, blue);
+
 		// PUSH LAYERS
 		temp.at(0).AddPixel(redP);
 		temp.at(1).AddPixel(greenP);
 		temp.at(2).AddPixel(blueP);
 	}
-	for (int i = 0; i < 3; ++i)
-		cout << temp.at(i).GetPixelVectorCount() << endl;
+
 	return temp;
 }
 
 Image HelperMethods::Combine(Image& red, Image& green, Image& blue) {
 	// Load Images, Create Temp
 	Image img = Image(red.GetHeader());
-
-	// Temporary DEBUG PRINTS ///////////////////// DELETE ME ///////////
-	PrintInfo(red);
-	PrintInfo(green);
-	PrintInfo(blue);
-	PrintInfo(img);
 
 	// Combine Each Pixel
 	for (int i = 0; i < red.GetPixelVectorCount(); ++i) {
@@ -483,8 +437,53 @@ Image HelperMethods::Combine(Image& red, Image& green, Image& blue) {
 		img.AddPixel(p);
 	}
 
+	return img;
+}
+
+
+Image HelperMethods::Rotate180(Image& top) {
+	// Load Images, Create Temp
+	Image img = Image(top.GetHeader());
+
+	// Rotate Image 180 degrees
+	int i = (top.GetHeight() * top.GetWidth()) - 1;
+	for (i; i > -1; --i) {
+		Pixel p = top.GetIndPixel(i);
+		img.AddPixel(p);
+	}
+
+	return img;
+}
+
+/* UNUSED! Rotates Image 90 Degrees, but needs to MODIFY
+// Header to change size:
+Image HelperMethods::Rotate90(Image& top) {
+	// Load Images, Create Temp
+	Image img = Image(top.GetHeader());
+
+	// Temporary DEBUG PRINTS ///////////////////// DELETE ME ///////////
+	PrintInfo(top);
+	PrintInfo(img);
+
+	// Rotate Image 90 degrees
+	short w = top.GetWidth();
+	short h = top.GetHeight();
+	int i = (w * h) - (w - 1);
+
+	// Loop
+	for (i; i < (w * h); ++i) {
+		for (int j = 0, k = i; j < h; ++j) {
+			Pixel p = top.GetIndPixel(k);
+			img.AddPixel(p);
+			k = k - w;
+		}
+	}
+
 	// DEBUG ERASE ME PRINT PIXEL COUNT ----------------------------------
 	cout << "Temp Pixels: " << img.GetPixelVectorCount() << endl;
 
 	return img;
+
 }
+//
+*/

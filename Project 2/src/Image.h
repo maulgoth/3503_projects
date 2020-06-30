@@ -19,14 +19,17 @@ public:
 		char bitsPerPixel;
 		char imageDescriptor;
 	};
+	Image();
 	Image(Header x);
 	void PrintHeader();
 	void AddPixel(Pixel& p);
-	vector<Pixel> GetPixels();
+	vector<Pixel>& GetPixels();
 	int GetPixelVectorCount();
 	void ChangePixel(int x, Pixel p);
 	Header GetHeader();
-	Pixel GetIndPixel(int x);
+	Pixel& GetIndPixel(int x);
+	short GetHeight();
+	short GetWidth();
 private:
 	Header head;
 	short width;

@@ -21,4 +21,6 @@ namespace HelperMethods {
 	Image Scale(Image& top, bool red, float x, bool green, float y, bool blue, float z);
 	vector<Image> SepRGB(Image& top);
 	Image Combine(Image& red, Image& green, Image& blue);
+	Image Rotate180(Image& top);
+	// Image Rotate90(Image& top);
 }

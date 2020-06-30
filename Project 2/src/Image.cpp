@@ -10,6 +10,13 @@ Image::Image(Header x) {
 	height = x.height;
 }
 
+Image::Image() {
+	// Default image, when file not found
+	head.idLength = 0;
+	width = 0;
+	height = 0;
+}
+
 Image::Header Image::GetHeader() {
 	return head;
 }
@@ -38,7 +45,7 @@ int Image::GetPixelVectorCount() {
 	return pixels.size();
 }
 
-vector<Pixel> Image::GetPixels() {
+vector<Pixel>& Image::GetPixels() {
 	return pixels;
 }
 
@@ -46,6 +53,14 @@ void Image::ChangePixel(int x, Pixel p) {
 	pixels.at(x) = p;
 }
 
-Pixel Image::GetIndPixel(int x) {
+Pixel& Image::GetIndPixel(int x) {
 	return pixels.at(x);
+}
+
+short Image::GetHeight() {
+	return height;
+}
+
+short Image::GetWidth() {
+	return width;
 }
