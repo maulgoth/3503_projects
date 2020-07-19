@@ -27,7 +27,6 @@ int main()
 	// Multiply
 	Image Test1 = Multiply(top1, bottom1);
 	writeFile("output/part1.tga", Test1);
-	cout << "Image 1 Created." << endl;
 	
 	// 2 /////////////////////////////////////////////////
 	// Load Images
@@ -37,7 +36,6 @@ int main()
 	// Subtract
 	Image Test2 = Subtract(top2, bottom2);
 	writeFile("output/part2.tga", Test2);
-	cout << "Image 2 Created." << endl;
 			
 	// 3 /////////////////////////////////////////////////
 	// Load Images
@@ -48,7 +46,6 @@ int main()
 	// Screen
 	Image Test3 = Screen(top3, bottom3, screen);
 	writeFile("output/part3.tga", Test3);
-	cout << "Image 3 Created." << endl;
 			
 	// 4 /////////////////////////////////////////////////
 	// Load Images
@@ -60,7 +57,6 @@ int main()
 	Image Test4TempImg = Multiply(top4, bottom4);
 	Image Test4 = Subtract(sub, Test4TempImg);
 	writeFile("output/part4.tga", Test4);
-	cout << "Image 4 Created." << endl;
 			
 	// 5 /////////////////////////////////////////////////
 	// Load Images
@@ -70,7 +66,6 @@ int main()
 	// Subtract
 	Image Test5 = Overlay(top5, bottom5);
 	writeFile("output/part5.tga", Test5);
-	cout << "Image 5 Created." << endl;
 			
 	// 6 /////////////////////////////////////////////////
 	// Load Images
@@ -79,7 +74,6 @@ int main()
 	// ADD RGB
 	Image Test6 = AddRGB(top6, 0, 200, 0);
 	writeFile("output/part6.tga", Test6);
-	cout << "Image 6 Created." << endl;
 
 	// 7 /////////////////////////////////////////////////
 	// Load Images
@@ -88,7 +82,6 @@ int main()
 	// SCALE
 	Image Test7 = Scale(top7, true, 4.0, false, 0.0, true, 0.0);
 	writeFile("output/part7.tga", Test7);
-	cout << "Image 7 Created." << endl;
 			
 	// 8 /////////////////////////////////////////////////
 	// Load Images
@@ -96,10 +89,12 @@ int main()
 
 	// SEP RGB
 	vector<Image> Test8 = SepRGB(top8);
-	writeFile("output/part8_r.tga", Test8.at(0));	
-	writeFile("output/part8_g.tga", Test8.at(1));			
+
+	writeFile("output/part8_r.tga", Test8.at(0));
+			
+	writeFile("output/part8_g.tga", Test8.at(1));
+				
 	writeFile("output/part8_b.tga", Test8.at(2));
-	cout << "Image 8 Created." << endl;
 			
 	// 9 /////////////////////////////////////////////////
 	// Load Images
@@ -110,7 +105,6 @@ int main()
 	// COMBINE
 	Image Test9 = Combine(top9red, top9green, top9blue);
 	writeFile("output/part9.tga", Test9);
-	cout << "Image 9 Created." << endl;
 
 	// 10 ////////////////////////////////////////////////
 	// Load Images
@@ -119,7 +113,6 @@ int main()
 	// ROTATE 180
 	Image Test10 = Rotate180(top10);
 	writeFile("output/part10.tga", Test10);
-	cout << "Image 10 Created." << endl;
 	
 	// EXTRA CREDIT //////////////////////////////////////
 	// Load Images
@@ -131,7 +124,6 @@ int main()
 	// Quadrant
 	Image TestExtraCredit = Quadrant(topX1, topX2, topX3, topX4);
 	writeFile("output/extracredit.tga", TestExtraCredit);
-	cout << "Extra Credit Image Created." << endl;
 
 	// EXIT //////////////////////////////////////////////
 	cout << "All tasks complete. Thank you." << endl;
