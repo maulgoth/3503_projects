@@ -16,14 +16,11 @@ vector<char> Helpers::readFile(int test_board) {
 		for (int i = 0; i < 16; i++) {
 			for (int j = 0; j < 25; j++) {
 				file.get(value);
-				std::cout << value;
 				bombs.push_back(value);
 			}
-			std::cout << std::endl;
 			file.ignore(1);
 		}
 		file.close();
 	}
-	std::cout << "Size: " << bombs.size();
 	return bombs;
-};
+}
