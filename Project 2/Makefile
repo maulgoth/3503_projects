@@ -1,7 +1,7 @@
 # Jeremy DePoyster - COP3503 Summer 2020 - Project 2 Makefile
 
 build:
-	g++ -o project2.out src/*.cpp
+	g++ -o project2.out src/*.cpp --pedantic
 clean:
 	rm output/*
 differences:
