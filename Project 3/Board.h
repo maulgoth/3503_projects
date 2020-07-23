@@ -17,6 +17,6 @@ public:
 	int GetWidth();
 	int GetHeight();
 	int GetSize();
-	void Initialize();
+	void Initialize(vector<char>& bombs);
 };
 

@@ -1,24 +1,38 @@
 #include "Tile.h"
 
-Tile::Tile(sf::Vector2f _position, const char* texture) {
+Tile::Tile(sf::Vector2f _position, const char* texture, SecretState sec_state) {
 	sprite = sf::Sprite(TextureManager::GetTexture(texture));
 	sprite.setPosition(_position.x, _position.y);
 	position = _position;
 	state = State::HIDDEN;
-	secretState = SecretState::EMPTY;
+	secret_state = sec_state;
 }
 
 Tile::State Tile::GetState() {
 	if (state == State::HIDDEN) {
-		std::cout << "HIDDEN, okay?" << std::endl;
+		std::cout << "HIDDEN. ";
 	}
 	else if (state == State::REVEALED && !revealed) {
-		std::cout << "REVEALED, truly!" << std::endl;
+		std::cout << "REVEALED!" << std::endl;
 		revealed = true;
 	}
 	else if (!revealed)
-		std::cout << "Not sure, something else!" << std::endl;
+		std::cout << "Error getting state! ";
 	return state;
+}
+
+Tile::SecretState Tile::GetSecretState() {
+	if (secret_state == SecretState::EMPTY && !scanned) {
+		std::cout << "No Mine. ";
+		scanned = true;
+	}
+	else if (secret_state == SecretState::MINE && !scanned) {
+		std::cout << "MINE MINE MINE! ";
+		scanned = true;
+	}
+	else if (!scanned)
+		std::cout << "Error scanning for mine! ";
+	return secret_state;
 }
 
 void Tile::SetState(State state_change) {
@@ -35,6 +49,15 @@ void Tile::SetSprite(const char* texture) {
 };
 
 void Tile::Reveal() {
-	if (state == State::HIDDEN)
+	if (state == State::HIDDEN) {
 		state = State::REVEALED;
+		if (secret_state == SecretState::MINE) {
+			SetSprite("mine");
+		}
+		else {
+			// EVENTUALLY THIS WILL TRACK THE STATE OF NUMBERS
+			SetSprite("tile_revealed");
+		}
+	}
+		
 }

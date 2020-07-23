@@ -2,6 +2,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <string>
+#include <vector>
 #include "Random.h"
 #include "TextureManager.h"
 #include "Board.h"
@@ -18,14 +19,21 @@ int main()
 
     // Background
     sf::RectangleShape background(sf::Vector2f(800, 600));
-    background.setFillColor(sf::Color(250, 250, 250));
+    background.setFillColor(sf::Color(200, 200, 200));
+
+    // Load Map -------------------------------------------------------- << REPLACE THIS WITH LOADER LATER BELOW
+    vector<char> bombs = Helpers::readFile(2);
+    cout << "\nFile loaded: " << bombs.size() << endl;
 
     // Create Board:
     Board board = Board(25, 16);
-    board.Initialize();
+    board.Initialize(bombs);
 
-    // Load Map -------------------------------------------------------- << REPLACE THIS WITH LOADER LATER
+    // Buttons
+    sf::Sprite debugButton(TextureManager::GetTexture("debug"));
+    debugButton.setPosition(500, 512);
 
+    
 
     // ======== 2. PROGRAM EXECUTION ======== /
     
@@ -50,10 +58,16 @@ int main()
                 //cout << position.x << " " << position.y << " " << gamePos.x << " " << gamePos.y << endl;
                 //cout << position.y / 32 << " " << position.x / 32 << endl;
                 //cout << 25 * (position.y / 32) + (position.x / 32) << endl;
-                Tile* currentSpot = &board.GetTile(25 * (position.y / 32) + (position.x / 32));
-                currentSpot->GetState();
-                currentSpot->SetSprite("tile_revealed");
-                currentSpot->Reveal();
+                if (position.y < 512) {
+                    Tile* currentSpot = &board.GetTile(25 * (position.y / 32) + (position.x / 32));
+                    currentSpot->GetState();
+                    currentSpot->GetSecretState();
+                    currentSpot->Reveal();
+                }
+                else {
+                    cout << position.x << ", " << position.y << endl;
+                }
+                
             }
         }
         
@@ -68,11 +82,12 @@ int main()
         // 2. Draw
 
         window.draw(background);
+        window.draw(debugButton);
 
         for (int i = 0; i < board.GetSize(); i++) {
             window.draw(board.GetTile(i).GetSprite());
         }
-
+        
         // 3. Display -- ONLY CALL ONCE!
         window.display();
     }
