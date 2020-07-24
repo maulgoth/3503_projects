@@ -22,6 +22,10 @@ void Tile::SetState(State state_change) {
 	state = state_change;
 }
 
+void Tile::SetSecretState(SecretState secret_state_change) {
+	secret_state = secret_state_change;
+}
+
 sf::Sprite& Tile::GetSprite() {
 	return sprite;
 }
@@ -39,8 +43,39 @@ bool Tile::Reveal() {
 				SetSprite("mine");
 				return true;
 			}
+			else if (secret_state == SecretState::ONE) {
+				SetSprite("number_1");
+				return false;
+			}
+			else if (secret_state == SecretState::TWO) {
+				SetSprite("number_2");
+				return false;
+			}
+			else if (secret_state == SecretState::THREE) {
+				SetSprite("number_3");
+				return false;
+			}
+			else if (secret_state == SecretState::FOUR) {
+				SetSprite("number_4");
+				return false;
+			}
+			else if (secret_state == SecretState::FIVE) {
+				SetSprite("number_5");
+				return false;
+			}
+			else if (secret_state == SecretState::SIX) {
+				SetSprite("number_6");
+				return false;
+			}
+			else if (secret_state == SecretState::SEVEN) {
+				SetSprite("number_7");
+				return false;
+			}
+			else if (secret_state == SecretState::EIGHT) {
+				SetSprite("number_8");
+				return false;
+			}
 			else {
-				// EVENTUALLY THIS WILL TRACK THE STATE OF NUMBERS
 				SetSprite("tile_revealed");
 				return false;
 			}
@@ -78,4 +113,17 @@ void Tile::ToggleFlag() {
 
 void Tile::SetGameOver() {
 	gameOver = true;
+}
+
+unsigned int Tile::GetNeighborCount() {
+	return neighbors.size();
+}
+
+
+void Tile::AddNeighbor(Tile* _neighbor) {
+	neighbors.push_back(_neighbor);
+}
+
+Tile* Tile::GetNeighbor(int _neighbor) {
+	return neighbors.at(_neighbor);
 }

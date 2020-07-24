@@ -11,7 +11,7 @@ using namespace std;
 
 int main()
 {
-    // ======== 1. INITIAILIZATION ======== /
+    // ======== INITIAILIZATION ========================================== /
     cout << "Testing! Testing! If you see me, that's good.\n" << endl;
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
 
@@ -26,7 +26,22 @@ int main()
 
     // Create Board:
     Board board = Board(25, 16);
-    board.Initialize(boardChoice);
+    board.InitializeRandom();      // THIS NEEDS TO BE THE REAL WAY TO START
+
+    // DEBUG DELETE ME LATER ----------------------------------------------------- <<<<<<<<<<<<<<<<<<<<
+    cout << 0 << ": " << board.GetTile(0).GetNeighborCount() << endl;
+    cout << 24 << ": " << board.GetTile(24).GetNeighborCount() << endl;
+    cout << 375 << ": " << board.GetTile(375).GetNeighborCount() << endl;
+    cout << 399 << ": " << board.GetTile(399).GetNeighborCount() << endl;
+    cout << 7 << ": " << board.GetTile(7).GetNeighborCount() << endl;
+    cout << 175 << ": " << board.GetTile(175).GetNeighborCount() << endl;
+    cout << 381 << ": " << board.GetTile(381).GetNeighborCount() << endl;
+    cout << 174 << ": " << board.GetTile(174).GetNeighborCount() << endl;
+    cout << 39 << ": " << board.GetTile(39).GetNeighborCount() << endl;
+    cout << 216 << ": " << board.GetTile(216).GetNeighborCount() << endl;
+    cout << 371 << ": " << board.GetTile(371).GetNeighborCount() << endl;
+    cout << 228 << ": " << board.GetTile(228).GetNeighborCount() << endl;
+    // DELETE ALL ABOVE ME ----------------------------------------------------- <<<<<<<<<<<<<<<<<<<<
 
     // Buttons
     sf::Sprite debugButton(TextureManager::GetTexture("debug"));
@@ -42,7 +57,7 @@ int main()
     sf::Sprite smiley(TextureManager::GetTexture("face_happy"));
     smiley.setPosition(350, 512);
 
-    // ======== 2. PROGRAM EXECUTION ======== /
+    // ======== PROGRAM EXECUTION ========================================== /
     
     while (window.isOpen())
     {
@@ -80,18 +95,25 @@ int main()
 
                     // New Board Buttons Logic
                     // Load Board 1
-                    else if ((position.x > 563 && position.x < 628) && (position.y > 512 && position.y < 576))
-                        boardChoice = 1;
+                    else if ((position.x > 563 && position.x < 628) && (position.y > 512 && position.y < 576)) {
+                        board.Initialize(1);
+                        smiley.setTexture(TextureManager::GetTexture("face_happy"));
+                    }
                     // Load Board 2
-                    else if ((position.x > 627 && position.x < 692) && (position.y > 512 && position.y < 576))
-                        boardChoice = 2;
+                    else if ((position.x > 627 && position.x < 692) && (position.y > 512 && position.y < 576)) {
+                        board.Initialize(2);
+                        smiley.setTexture(TextureManager::GetTexture("face_happy"));
+                    }
                     // Load Board 3
-                    else if ((position.x > 691 && position.x < 756) && (position.y > 512 && position.y < 576))
-                        boardChoice = 3;
+                    else if ((position.x > 691 && position.x < 756) && (position.y > 512 && position.y < 576)) {
+                        board.Initialize(3);
+                        smiley.setTexture(TextureManager::GetTexture("face_happy"));
+                    }
 
                     // Smiley Button Logic
                     else if ((position.x > 349 && position.x < 414) && (position.y > 512 && position.y < 576)) {
-                        board.Initialize(boardChoice);
+                        //board.Initialize(2); // <-------- REPLACE WITH THE BELOW METHOD RANDOM
+                        board.InitializeRandom();    // THIS NEEDS TO BE THE REAL WAY TO START
                         smiley.setTexture(TextureManager::GetTexture("face_happy"));
                     }
                 }
@@ -110,7 +132,7 @@ int main()
             }
         }
 
-        // ======== Draw ======== /
+        // ======== Draw ========================================== /
 
         
         // 1. Clear -- ONLY CALL ONCE!
@@ -133,7 +155,7 @@ int main()
         window.display();
     }
 
-    // ======== Clean Up ======== /
+    // ======== Clean Up ========================================== /
     TextureManager::Clear();
 
 

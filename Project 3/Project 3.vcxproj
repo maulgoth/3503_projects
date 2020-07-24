@@ -154,7 +154,7 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Helpers.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="test_main.cpp" />
+    <ClCompile Include="OLD_main_initialTests.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Tile.cpp" />

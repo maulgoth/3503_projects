@@ -2,13 +2,14 @@
 #include "TextureManager.h"
 #include "Tile.h"
 #include "Helpers.h"
+#include "Random.h"
 #include <vector>
 using std::vector;
 
 class Board
 {
 private:
-	int mineCount;
+	int mineCount = 0;
 	vector<Tile> board;
 	int width;
 	int height;
@@ -20,9 +21,11 @@ public:
 	int GetWidth();
 	int GetHeight();
 	int GetSize();
-	//void Initialize(vector<char>& bombs);
 	void Initialize(int board);
+	void InitializeRandom();
 	void ToggleDebug();
 	bool GetGameOver();
 	void SetGameOver();
+	void SetAllNeighbors();
+	void SetNeighborNumbers();
 };
