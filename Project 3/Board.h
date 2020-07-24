@@ -11,21 +11,31 @@ class Board
 private:
 	int mineCount = 0;
 	vector<Tile> board;
-	int width;
-	int height;
+	unsigned int width;
+	unsigned int height;
 	bool debug = false;
 	bool gameOver = false;
 public:
-	Tile& GetTile(int tile);
+	// Constructor
 	Board(int _width, int _height);
-	int GetWidth();
-	int GetHeight();
-	int GetSize();
+
+	// Initial Methods
 	void Initialize(int board);
 	void InitializeRandom();
-	void ToggleDebug();
+
+	// Getters
+	Tile& GetTile(int tile);
+	int GetWidth();
+	int GetHeight();
+	unsigned int GetSize();
 	bool GetGameOver();
-	void SetGameOver();
+
+	// Setters
 	void SetAllNeighbors();
 	void SetNeighborNumbers();
+	
+	// Modes
+	void ToggleDebug();
+	void SetGameOver();
+
 };

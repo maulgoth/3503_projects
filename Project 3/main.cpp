@@ -13,12 +13,10 @@ int main()
 {
     // ======== INITIAILIZATION ========================================== /
     cout << "Testing! Testing! If you see me, that's good.\n" << endl;
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Minesweeper Clone", 
+        sf::Style::Close | sf::Style::Titlebar); // No resize!
 
-    // 1. Create sprites
-
-    // Initial board
-    int boardChoice = 2;
+    // Create sprites
 
     // Background
     sf::RectangleShape background(sf::Vector2f(800, 600));
@@ -89,30 +87,34 @@ int main()
                     }
 
                     // Debug Button Logic
-                    else if ((position.x > 499 && position.x < 564) && (position.y > 512 && position.y < 576))
+                    else if ((position.x > 499 && position.x < 564) && 
+                        (position.y > 512 && position.y < 576))
                         board.ToggleDebug();
 
 
                     // New Board Buttons Logic
                     // Load Board 1
-                    else if ((position.x > 563 && position.x < 628) && (position.y > 512 && position.y < 576)) {
+                    else if ((position.x > 563 && position.x < 628) 
+                        && (position.y > 512 && position.y < 576)) {
                         board.Initialize(1);
                         smiley.setTexture(TextureManager::GetTexture("face_happy"));
                     }
                     // Load Board 2
-                    else if ((position.x > 627 && position.x < 692) && (position.y > 512 && position.y < 576)) {
+                    else if ((position.x > 627 && position.x < 692) 
+                        && (position.y > 512 && position.y < 576)) {
                         board.Initialize(2);
                         smiley.setTexture(TextureManager::GetTexture("face_happy"));
                     }
                     // Load Board 3
-                    else if ((position.x > 691 && position.x < 756) && (position.y > 512 && position.y < 576)) {
+                    else if ((position.x > 691 && position.x < 756) 
+                        && (position.y > 512 && position.y < 576)) {
                         board.Initialize(3);
                         smiley.setTexture(TextureManager::GetTexture("face_happy"));
                     }
 
                     // Smiley Button Logic
-                    else if ((position.x > 349 && position.x < 414) && (position.y > 512 && position.y < 576)) {
-                        //board.Initialize(2); // <-------- REPLACE WITH THE BELOW METHOD RANDOM
+                    else if ((position.x > 349 && position.x < 414) 
+                        && (position.y > 512 && position.y < 576)) {
                         board.InitializeRandom();    // THIS NEEDS TO BE THE REAL WAY TO START
                         smiley.setTexture(TextureManager::GetTexture("face_happy"));
                     }
@@ -147,7 +149,7 @@ int main()
         window.draw(test3Button);
         window.draw(smiley);
 
-        for (int i = 0; i < board.GetSize(); i++) {
+        for (unsigned int i = 0; i < board.GetSize(); i++) {
             window.draw(board.GetTile(i).GetSprite());
         }
         

@@ -6,8 +6,8 @@ Tile::Tile(sf::Vector2f _position, const char* texture, SecretState sec_state) {
 	position = _position;
 	state = State::HIDDEN;
 	secret_state = sec_state;
-	gameOver = false;
 	clickable = true;
+	right_clickable = true;
 }
 
 Tile::State Tile::GetState() {
@@ -92,8 +92,15 @@ void Tile::SetClickable(bool t_or_f) {
 		clickable = false;
 }
 
+void Tile::SetRightClickable(bool t_or_f) {
+	if (t_or_f == true)
+		right_clickable = true;
+	else if (t_or_f == false)
+		right_clickable = false;
+}
+
 void Tile::ToggleFlag() {
-	if (!gameOver) {
+	if (right_clickable) {
 		if (state == State::HIDDEN) {
 			clickable = false;
 			state = State::FLAGGED;
@@ -109,10 +116,6 @@ void Tile::ToggleFlag() {
 	}
 	else
 		std::cout << "Can't flag, game over" << std::endl;
-}
-
-void Tile::SetGameOver() {
-	gameOver = true;
 }
 
 unsigned int Tile::GetNeighborCount() {

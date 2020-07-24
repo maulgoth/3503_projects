@@ -14,8 +14,9 @@ private:
 	vector<Tile*> neighbors;
 	sf::Sprite sprite;
 	bool clickable;
-	bool gameOver;
+	bool right_clickable;
 public:
+	// State
 	enum class State { HIDDEN, REVEALED, FLAGGED };
 	State state;
 	State GetState();
@@ -24,15 +25,24 @@ public:
 	SecretState secret_state;
 	SecretState GetSecretState();
 	void SetSecretState(SecretState secret_state_change);
+
+	// Constructor
 	Tile(sf::Vector2f _position, const char* texture, SecretState sec_state);
+
+	// Getters
 	sf::Sprite& GetSprite();
-	void SetSprite(const char* texture);
-	bool Reveal();
+	Tile* GetNeighbor(int _neighbor);
+
+	// Setters
 	void SetClickable(bool t_or_f);
+	void SetRightClickable(bool t_or_f);
+	void SetSprite(const char* texture);
+
+	// Methods
+	bool Reveal();
 	void ToggleFlag();
-	void SetGameOver();
 	unsigned int GetNeighborCount();
 	void AddNeighbor(Tile* _neighbor);
-	Tile* GetNeighbor(int _neighbor);
+	void RevealNeighbors();
 };
 

@@ -17,7 +17,7 @@ int Board::GetHeight() {
     return height;
 }
 
-int Board::GetSize() {
+unsigned int Board::GetSize() {
     return width * height;
 }
 
@@ -26,17 +26,15 @@ void Board::ToggleDebug() {
         debug = false;
     else
         debug = true;
-    for (int i = 0; i < GetSize(); i++) {
-        if (debug && board.at(i).GetState() == Tile::State::FLAGGED)
-            board.at(i).SetSprite("flag");
-        else if (debug && board.at(i).GetSecretState() == Tile::SecretState::MINE)
-            board.at(i).SetSprite("mine");
-        else if (!debug && board.at(i).GetState() == Tile::State::FLAGGED)
-            board.at(i).SetSprite("flag");
-        /*else if (!debug && board.at(i).GetSecretState() == Tile::SecretState::MINE && gameOver && board.at(i).GetState() == Tile::State::REVEALED)
-            board.at(i).SetSprite("mine");*/
-        else if (!debug && board.at(i).GetSecretState() == Tile::SecretState::MINE)
-            board.at(i).SetSprite("tile_hidden");
+    if (!gameOver) {
+        for (unsigned int i = 0; i < GetSize(); i++) {
+            if (debug && board.at(i).GetSecretState() == Tile::SecretState::MINE)
+                board.at(i).SetSprite("mine");
+            else if (!debug && board.at(i).GetState() == Tile::State::FLAGGED)
+                board.at(i).SetSprite("flag");
+            else if (!debug && board.at(i).GetSecretState() == Tile::SecretState::MINE)
+                board.at(i).SetSprite("tile_hidden");
+        }
     }
 }
 
@@ -46,14 +44,13 @@ void Board::Initialize(int load_board) {
     std::cout << "File loaded: " << bombs.size() << " tiles scanned." << std::endl;
 
     // Clear Board vector
-    debug = false; // Important! Otherwise have to click debug twice on test #'s
     gameOver = false;
     board.clear();
     mineCount = 0;
 
     // Create board vector of tiles. Each tile 32x32
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
+    for (unsigned int i = 0; i < height; i++) {
+        for (unsigned int j = 0; j < width; j++) {
             sf::Vector2f position = sf::Vector2f((float)(j) * 32, (float)(i) * 32);
             Tile::SecretState sec_state;
             int x = (width * i) + j;
@@ -63,8 +60,16 @@ void Board::Initialize(int load_board) {
             }
             else
                 sec_state = Tile::SecretState::EMPTY;
-            Tile temp = Tile(position, "tile_hidden", sec_state);
-            board.push_back(temp);
+
+            // Keep mines revealed if debug
+            if (debug && sec_state == Tile::SecretState::MINE) {
+                Tile temp = Tile(position, "mine", sec_state);
+                board.push_back(temp);
+            }
+            else {
+                Tile temp = Tile(position, "tile_hidden", sec_state);
+                board.push_back(temp);
+            }
         }
     }
 
@@ -93,14 +98,13 @@ void Board::InitializeRandom() {
     }
 
     // Initialize Board
-    debug = false; // Important! Otherwise have to click debug twice on test #'s
     gameOver = false;
     board.clear();
-    mineCount = 50;
+    mineCount = 0;
 
     // Create board vector of tiles. Each tile 32x32
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
+    for (unsigned int i = 0; i < height; i++) {
+        for (unsigned int j = 0; j < width; j++) {
             sf::Vector2f position = sf::Vector2f((float)(j) * 32, (float)(i) * 32);
             Tile::SecretState sec_state = Tile::SecretState::EMPTY;
             Tile temp = Tile(position, "tile_hidden", sec_state);
@@ -111,6 +115,9 @@ void Board::InitializeRandom() {
     // Set Bombs from Random List
     for (unsigned int i = 0; i < randoMines.size(); i++) {
         board.at(randoMines.at(i)).SetSecretState(Tile::SecretState::MINE);
+        mineCount++;
+        if (debug)
+            board.at(randoMines.at(i)).SetSprite("mine");
     }
 
     // Utilize Neighbor and Number Methods
@@ -129,9 +136,10 @@ void Board::SetGameOver() {
 
     for (unsigned int i = 0; i < board.size(); i++) {
         board.at(i).SetClickable(false);
-        board.at(i).SetGameOver();
-        if (board.at(i).GetSecretState() == Tile::SecretState::MINE)
+        board.at(i).SetRightClickable(false);
+        if (board.at(i).GetSecretState() == Tile::SecretState::MINE) {
             board.at(i).SetSprite("mine");
+        }
     }
 }
 
