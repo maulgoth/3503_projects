@@ -24,3 +24,7 @@ vector<char> Helpers::readFile(int test_board) {
 	}
 	return bombs;
 }
+
+int Helpers::digitizer(int number) {
+
+}

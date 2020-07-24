@@ -55,6 +55,12 @@ int main()
     sf::Sprite smiley(TextureManager::GetTexture("face_happy"));
     smiley.setPosition(350, 512);
 
+    // Counter
+    sf::Texture digits = TextureManager::GetTexture("digits");
+    sf::Sprite counter;
+    counter.setTexture(digits);
+    counter.setTextureRect(21)
+
     // ======== PROGRAM EXECUTION ========================================== /
     
     while (window.isOpen())
@@ -77,13 +83,12 @@ int main()
                     // Reveal Tile Logic
                     if (position.y < 512) {
                         Tile* currentSpot = &board.GetTile(25 * (position.y / 32) + (position.x / 32));
-                        // Reveal returns true if mine, false if anything else
-                        bool gameOver = currentSpot->Reveal();
-                        // Check if mine. If so, game over, tiles become unclickable
-                        if (gameOver) {
-                            board.SetGameOver();
+                        board.RevealTile(currentSpot);
+                        board.GetGameOver();
+                        if (board.GetVictory())
+                            smiley.setTexture(TextureManager::GetTexture("face_win"));
+                        if (board.GetGameOver())
                             smiley.setTexture(TextureManager::GetTexture("face_lose"));
-                        }
                     }
 
                     // Debug Button Logic

@@ -26,7 +26,7 @@ void Board::ToggleDebug() {
         debug = false;
     else
         debug = true;
-    if (!gameOver) {
+    if (!gameOver && !victory) {
         for (unsigned int i = 0; i < GetSize(); i++) {
             if (debug && board.at(i).GetSecretState() == Tile::SecretState::MINE)
                 board.at(i).SetSprite("mine");
@@ -45,8 +45,10 @@ void Board::Initialize(int load_board) {
 
     // Clear Board vector
     gameOver = false;
+    victory = false;
     board.clear();
     mineCount = 0;
+    flagCount = 0;
 
     // Create board vector of tiles. Each tile 32x32
     for (unsigned int i = 0; i < height; i++) {
@@ -99,8 +101,10 @@ void Board::InitializeRandom() {
 
     // Initialize Board
     gameOver = false;
+    victory = false;
     board.clear();
     mineCount = 0;
+    flagCount = 0;
 
     // Create board vector of tiles. Each tile 32x32
     for (unsigned int i = 0; i < height; i++) {
@@ -250,6 +254,41 @@ void Board::SetNeighborNumbers() {
                 board.at(i).SetSecretState(Tile::SecretState::SEVEN);
             else if (count == 8)
                 board.at(i).SetSecretState(Tile::SecretState::EIGHT);
+
+            // Else, set to empty
+            else
+                board.at(i).SetSecretState(Tile::SecretState::EMPTY);
         }
     }
+}
+
+void Board::RevealTile(Tile* tile) {
+    bool end = tile->Reveal();
+    if (end)
+        SetGameOver();
+}
+
+bool Board::GetVictory() {
+    int count = 0;
+    for (unsigned int i = 0; i < GetSize(); i++) {
+        if (board.at(i).GetState() == Tile::State::REVEALED)
+            count++;
+    }
+    std::cout << count;
+    if (GetSize() - count - mineCount == 0) {
+        for (unsigned int i = 0; i < board.size(); i++) {
+            board.at(i).SetClickable(false);
+            board.at(i).SetRightClickable(false);
+            if (board.at(i).GetSecretState() == Tile::SecretState::MINE) {
+                board.at(i).SetSprite("flag");
+            }
+        }
+        victory = true;
+        return true;
+    }
+    return false;
+}
+
+int Board::GetFlagCount() {
+    return flagCount;
 }

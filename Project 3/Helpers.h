@@ -12,4 +12,5 @@ class Helpers
 private:
 public:
 	static vector<char> readFile(int test_board);
+	int digitizer(int number);
 };

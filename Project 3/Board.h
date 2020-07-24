@@ -10,11 +10,13 @@ class Board
 {
 private:
 	int mineCount = 0;
+	int flagCount = 0;
 	vector<Tile> board;
 	unsigned int width;
 	unsigned int height;
 	bool debug = false;
 	bool gameOver = false;
+	bool victory = false;
 public:
 	// Constructor
 	Board(int _width, int _height);
@@ -29,6 +31,8 @@ public:
 	int GetHeight();
 	unsigned int GetSize();
 	bool GetGameOver();
+	bool GetVictory();
+	int GetFlagCount();
 
 	// Setters
 	void SetAllNeighbors();
@@ -37,5 +41,6 @@ public:
 	// Modes
 	void ToggleDebug();
 	void SetGameOver();
+	void RevealTile(Tile* tile);
 
 };

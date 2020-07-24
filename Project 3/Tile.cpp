@@ -36,6 +36,8 @@ void Tile::SetSprite(const char* texture) {
 }
 
 bool Tile::Reveal() {
+	// If clickable and mine, returns true
+	
 	if (clickable) {
 		if (state == State::HIDDEN) {
 			state = State::REVEALED;
@@ -77,11 +79,13 @@ bool Tile::Reveal() {
 			}
 			else {
 				SetSprite("tile_revealed");
+				for (unsigned int i = 0; i < GetNeighborCount(); i++)
+					GetNeighbor(i)->Reveal();
 				return false;
 			}
 		}
 	}
-	std::cout << "Not clickable!" << std::endl;
+	/*std::cout << "Not clickable!" << std::endl;*/
 	return false;
 }
 
