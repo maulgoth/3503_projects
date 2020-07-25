@@ -114,9 +114,7 @@ void Tile::ToggleFlag() {
 			state = State::HIDDEN;
 			SetSprite("tile_hidden");
 		}
-		else if (state == State::REVEALED)
 	}
-	else
 }
 
 unsigned int Tile::GetNeighborCount() {
