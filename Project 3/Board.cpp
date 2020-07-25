@@ -83,7 +83,6 @@ void Board::Initialize(int load_board) {
 void Board::InitializeRandom() {
 
     // Generate random mine positions
-    std::cout << "Trying random:" << std::endl;
     vector<int> randoMines;
     randoMines.push_back(Random::Int(0, 399));
     while (randoMines.size() < 50) {
@@ -274,7 +273,6 @@ bool Board::GetVictory() {
         if (board.at(i).GetState() == Tile::State::REVEALED)
             count++;
     }
-    std::cout << count;
     if (GetSize() - count - mineCount == 0) {
         for (unsigned int i = 0; i < board.size(); i++) {
             board.at(i).SetClickable(false);
@@ -290,5 +288,14 @@ bool Board::GetVictory() {
 }
 
 int Board::GetFlagCount() {
+    flagCount = 0;
+    for (unsigned int i = 0; i < GetSize(); i++) {
+        if (board.at(i).GetState() == Tile::State::FLAGGED)
+            flagCount++;
+    }
     return flagCount;
+}
+
+int Board::GetMineCount() {
+    return mineCount;
 }

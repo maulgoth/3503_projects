@@ -43,6 +43,5 @@ public:
 	void ToggleFlag();
 	unsigned int GetNeighborCount();
 	void AddNeighbor(Tile* _neighbor);
-	void RevealNeighbors();
 };
 

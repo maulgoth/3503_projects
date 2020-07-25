@@ -33,6 +33,7 @@ public:
 	bool GetGameOver();
 	bool GetVictory();
 	int GetFlagCount();
+	int GetMineCount();
 
 	// Setters
 	void SetAllNeighbors();

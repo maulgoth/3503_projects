@@ -26,21 +26,6 @@ int main()
     Board board = Board(25, 16);
     board.InitializeRandom();      // THIS NEEDS TO BE THE REAL WAY TO START
 
-    // DEBUG DELETE ME LATER ----------------------------------------------------- <<<<<<<<<<<<<<<<<<<<
-    cout << 0 << ": " << board.GetTile(0).GetNeighborCount() << endl;
-    cout << 24 << ": " << board.GetTile(24).GetNeighborCount() << endl;
-    cout << 375 << ": " << board.GetTile(375).GetNeighborCount() << endl;
-    cout << 399 << ": " << board.GetTile(399).GetNeighborCount() << endl;
-    cout << 7 << ": " << board.GetTile(7).GetNeighborCount() << endl;
-    cout << 175 << ": " << board.GetTile(175).GetNeighborCount() << endl;
-    cout << 381 << ": " << board.GetTile(381).GetNeighborCount() << endl;
-    cout << 174 << ": " << board.GetTile(174).GetNeighborCount() << endl;
-    cout << 39 << ": " << board.GetTile(39).GetNeighborCount() << endl;
-    cout << 216 << ": " << board.GetTile(216).GetNeighborCount() << endl;
-    cout << 371 << ": " << board.GetTile(371).GetNeighborCount() << endl;
-    cout << 228 << ": " << board.GetTile(228).GetNeighborCount() << endl;
-    // DELETE ALL ABOVE ME ----------------------------------------------------- <<<<<<<<<<<<<<<<<<<<
-
     // Buttons
     sf::Sprite debugButton(TextureManager::GetTexture("debug"));
     debugButton.setPosition(500, 512);
@@ -56,10 +41,18 @@ int main()
     smiley.setPosition(350, 512);
 
     // Counter
-    sf::Texture digits = TextureManager::GetTexture("digits");
-    sf::Sprite counter;
-    counter.setTexture(digits);
-    counter.setTextureRect(21)
+    sf::Texture digitTexture = TextureManager::GetTexture("digits");
+    vector<sf::IntRect> digitRects;
+    for (int i = 0; i < 211; i += 21)
+        digitRects.push_back(sf::IntRect(i, 0, 21, 32));
+    vector<int> nums = Helpers::digitizer(board.GetMineCount());
+    vector<sf::Sprite> digitDisplay;
+    for (int i = 0, j = 50; i < 3; i++) {
+        digitDisplay.push_back(sf::Sprite(digitTexture));
+        digitDisplay.at(i).setPosition(j, 512);
+        j += 21;
+        digitDisplay.at(i).setTextureRect(digitRects.at(nums.at(i)));
+    }
 
     // ======== PROGRAM EXECUTION ========================================== /
     
@@ -103,18 +96,27 @@ int main()
                         && (position.y > 512 && position.y < 576)) {
                         board.Initialize(1);
                         smiley.setTexture(TextureManager::GetTexture("face_happy"));
+                        nums = Helpers::digitizer(board.GetMineCount() - board.GetFlagCount());
+                        for (int i = 0; i < 3; i++)
+                            digitDisplay.at(i).setTextureRect(digitRects.at(nums.at(i)));
                     }
                     // Load Board 2
                     else if ((position.x > 627 && position.x < 692) 
                         && (position.y > 512 && position.y < 576)) {
                         board.Initialize(2);
                         smiley.setTexture(TextureManager::GetTexture("face_happy"));
+                        nums = Helpers::digitizer(board.GetMineCount() - board.GetFlagCount());
+                        for (int i = 0; i < 3; i++)
+                            digitDisplay.at(i).setTextureRect(digitRects.at(nums.at(i)));
                     }
                     // Load Board 3
                     else if ((position.x > 691 && position.x < 756) 
                         && (position.y > 512 && position.y < 576)) {
                         board.Initialize(3);
                         smiley.setTexture(TextureManager::GetTexture("face_happy"));
+                        nums = Helpers::digitizer(board.GetMineCount() - board.GetFlagCount());
+                        for (int i = 0; i < 3; i++)
+                            digitDisplay.at(i).setTextureRect(digitRects.at(nums.at(i)));
                     }
 
                     // Smiley Button Logic
@@ -122,6 +124,9 @@ int main()
                         && (position.y > 512 && position.y < 576)) {
                         board.InitializeRandom();    // THIS NEEDS TO BE THE REAL WAY TO START
                         smiley.setTexture(TextureManager::GetTexture("face_happy"));
+                        nums = Helpers::digitizer(board.GetMineCount() - board.GetFlagCount());
+                        for (int i = 0; i < 3; i++)
+                            digitDisplay.at(i).setTextureRect(digitRects.at(nums.at(i)));
                     }
                 }
 
@@ -133,8 +138,10 @@ int main()
                     if (position.y < 512) {
                         Tile* currentSpot = &board.GetTile(25 * (position.y / 32) + (position.x / 32));
                         currentSpot->ToggleFlag();
+                        nums = Helpers::digitizer(board.GetMineCount() - board.GetFlagCount());
+                        for (int i = 0; i < 3; i++)
+                            digitDisplay.at(i).setTextureRect(digitRects.at(nums.at(i)));
                     }
-
                 }
             }
         }
@@ -153,6 +160,8 @@ int main()
         window.draw(test2Button);
         window.draw(test3Button);
         window.draw(smiley);
+        for (int i = 0; i < 3; i++)
+            window.draw(digitDisplay.at(i));
 
         for (unsigned int i = 0; i < board.GetSize(); i++) {
             window.draw(board.GetTile(i).GetSprite());
@@ -164,7 +173,7 @@ int main()
 
     // ======== Clean Up ========================================== /
     TextureManager::Clear();
-
+    
 
     return 0;
 }

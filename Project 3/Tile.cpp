@@ -85,7 +85,6 @@ bool Tile::Reveal() {
 			}
 		}
 	}
-	/*std::cout << "Not clickable!" << std::endl;*/
 	return false;
 }
 
@@ -116,10 +115,8 @@ void Tile::ToggleFlag() {
 			SetSprite("tile_hidden");
 		}
 		else if (state == State::REVEALED)
-			std::cout << "Can't flag." << std::endl;
 	}
 	else
-		std::cout << "Can't flag, game over" << std::endl;
 }
 
 unsigned int Tile::GetNeighborCount() {
