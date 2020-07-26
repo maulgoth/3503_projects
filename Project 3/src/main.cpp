@@ -1,9 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <unordered_map>
-#include <string>
 #include <vector>
-#include "Random.h"
 #include "TextureManager.h"
 #include "Board.h"
 #include "Helpers.h"

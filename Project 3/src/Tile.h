@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include <string>
 #include "TextureManager.h"
 using std::string;
 using std::vector;
@@ -31,7 +30,7 @@ public:
 
 	// Getters
 	sf::Sprite& GetSprite();
-	Tile* GetNeighbor(int _neighbor);
+	Tile* GetNeighbor(unsigned int _neighbor);
 
 	// Setters
 	void SetClickable(bool t_or_f);

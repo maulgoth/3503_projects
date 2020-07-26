@@ -1,19 +1,19 @@
 #include "Board.h"
 
-Board::Board(int _width, int _height) {
+Board::Board(unsigned int _width, unsigned int _height) {
     width = _width;
     height = _height;
 }
 
-Tile& Board::GetTile(int tile) {
+Tile& Board::GetTile(unsigned int tile) {
 	return board.at(tile);
 }
 
-int Board::GetWidth() {
+unsigned int Board::GetWidth() {
     return width;
 }
 
-int Board::GetHeight() {
+unsigned int Board::GetHeight() {
     return height;
 }
 
@@ -55,7 +55,7 @@ void Board::Initialize(int load_board) {
         for (unsigned int j = 0; j < width; j++) {
             sf::Vector2f position = sf::Vector2f((float)(j) * 32, (float)(i) * 32);
             Tile::SecretState sec_state;
-            int x = (width * i) + j;
+            unsigned int x = (width * i) + j;
             if (bombs.at(x) == '1') {
                 sec_state = Tile::SecretState::MINE;
                 mineCount++;

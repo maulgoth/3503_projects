@@ -126,6 +126,6 @@ void Tile::AddNeighbor(Tile* _neighbor) {
 	neighbors.push_back(_neighbor);
 }
 
-Tile* Tile::GetNeighbor(int _neighbor) {
+Tile* Tile::GetNeighbor(unsigned int _neighbor) {
 	return neighbors.at(_neighbor);
 }

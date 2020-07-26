@@ -19,16 +19,16 @@ private:
 	bool victory = false;
 public:
 	// Constructor
-	Board(int _width, int _height);
+	Board(unsigned int _width, unsigned int _height);
 
 	// Initial Methods
 	void Initialize(int board);
 	void InitializeRandom();
 
 	// Getters
-	Tile& GetTile(int tile);
-	int GetWidth();
-	int GetHeight();
+	Tile& GetTile(unsigned int tile);
+	unsigned int GetWidth();
+	unsigned int GetHeight();
 	unsigned int GetSize();
 	bool GetGameOver();
 	bool GetVictory();
