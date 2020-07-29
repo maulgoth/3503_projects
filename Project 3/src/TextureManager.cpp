@@ -1,3 +1,8 @@
+// ****************************************************//
+// Jeremy DePoyster - COP3503 Summer 2020 - UF Online //
+// This code comes from Professor Joshua Fox         //
+// *************************************************//
+
 #include "TextureManager.h"
 
 unordered_map<string, sf::Texture> TextureManager::textures;

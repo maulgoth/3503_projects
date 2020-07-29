@@ -1,3 +1,10 @@
+// ***************************************************** //
+// Jeremy DePoyster - COP3503 Summer 2020 - UF Online   //
+// All code completely original,					   //
+// Inspired by Professor Joshua Fox's lectures,       //
+// Or from previous COP3503 Projects and Labs        //
+// *************************************************//
+
 #include "Tile.h"
 
 Tile::Tile(sf::Vector2f _position, const char* texture, SecretState sec_state) {

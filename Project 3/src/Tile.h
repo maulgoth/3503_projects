@@ -1,3 +1,10 @@
+// ***************************************************** //
+// Jeremy DePoyster - COP3503 Summer 2020 - UF Online   //
+// All code completely original,					   //
+// Inspired by Professor Joshua Fox's lectures,       //
+// Or from previous COP3503 Projects and Labs        //
+// *************************************************//
+
 #pragma once
 #include <iostream>
 #include <vector>

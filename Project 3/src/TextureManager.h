@@ -1,3 +1,8 @@
+// ****************************************************//
+// Jeremy DePoyster - COP3503 Summer 2020 - UF Online //
+// This code comes from Professor Joshua Fox         //
+// *************************************************//
+
 #pragma once
 #include "SFML/Graphics.hpp"
 #include <iostream>
