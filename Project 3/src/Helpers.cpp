@@ -8,13 +8,8 @@
 #include "Helpers.h"
 
 vector<char> Helpers::readFile(int test_board) {
-	if (test_board < 1 || test_board > 3)
-		std::cout << "BOARD NOT AVAIL!" << std::endl;
 
 	string fileName = "boards/testboard" + std::to_string(test_board) + ".brd";
-
-	std::cout << "Loading " << fileName << " ...." << std::endl;
-
 	vector<char> bombs;
 	ifstream file(fileName);
 

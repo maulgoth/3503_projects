@@ -48,7 +48,6 @@ void Board::ToggleDebug() {
 void Board::Initialize(int load_board) {
     // Read board file with mine info
     vector<char> bombs = Helpers::readFile(load_board);
-    std::cout << "File loaded: " << bombs.size() << " tiles scanned." << std::endl;
 
     // Clear Board vector
     gameOver = false;

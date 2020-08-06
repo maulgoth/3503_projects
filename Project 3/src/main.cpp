@@ -16,8 +16,8 @@ using namespace std;
 int main()
 {
     // ======== INITIAILIZATION ========================================== /
-    cout << "Testing! Testing! If you see me, that's good.\n" << endl;
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Minesweeper Clone", 
+    cout << "Minesweeper Game Starting... Have fun!\n" << endl;
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Minesweeper Gane - Gator Edition 2020", 
         sf::Style::Close | sf::Style::Titlebar); // No resize!
 
     // Create sprites
@@ -82,8 +82,13 @@ int main()
                          Tile* currentSpot = &board.GetTile(25 * (position.y / 32) + (position.x / 32));
                          board.RevealTile(currentSpot);
                          board.GetGameOver();
-                         if (board.GetVictory())
+                         if (board.GetVictory()) {
                              smiley.setTexture(TextureManager::GetTexture("face_win"));
+                             for (int i = 0; i < 3; i++) {
+                                nums.at(i) = 0;
+                                digitDisplay.at(i).setTextureRect(digitRects.at(nums.at(i)));
+                             }
+                         }
                          if (board.GetGameOver())
                              smiley.setTexture(TextureManager::GetTexture("face_lose"));
                      }
