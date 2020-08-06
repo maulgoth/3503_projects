@@ -273,6 +273,10 @@ void Board::RevealTile(Tile* tile) {
         SetGameOver();
 }
 
+void Board::ToggleFlag(Tile* tile) {
+    tile->ToggleFlag(debug);
+}
+
 bool Board::GetVictory() {
     int count = 0;
     for (unsigned int i = 0; i < GetSize(); i++) {

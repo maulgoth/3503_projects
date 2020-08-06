@@ -109,12 +109,17 @@ void Tile::SetRightClickable(bool t_or_f) {
 		right_clickable = false;
 }
 
-void Tile::ToggleFlag() {
+void Tile::ToggleFlag(bool debug) {
 	if (right_clickable) {
 		if (state == State::HIDDEN) {
 			clickable = false;
 			state = State::FLAGGED;
 			SetSprite("flag");
+		}
+		else if (state == State::FLAGGED && debug && secret_state == SecretState::MINE) {
+			clickable = true;
+			state = State::HIDDEN;
+			SetSprite("mine");
 		}
 		else if (state == State::FLAGGED) {
 			clickable = true;

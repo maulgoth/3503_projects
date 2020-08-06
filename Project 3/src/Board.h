@@ -50,5 +50,5 @@ public:
 	void ToggleDebug();
 	void SetGameOver();
 	void RevealTile(Tile* tile);
-
+	void ToggleFlag(Tile* tile);
 };

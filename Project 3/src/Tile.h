@@ -46,7 +46,7 @@ public:
 
 	// Methods
 	bool Reveal();
-	void ToggleFlag();
+	void ToggleFlag(bool debug);
 	unsigned int GetNeighborCount();
 	void AddNeighbor(Tile* _neighbor);
 };

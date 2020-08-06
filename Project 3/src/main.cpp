@@ -146,7 +146,7 @@ int main()
                      // Flag Logic
                      if (position.y < 512) {
                          Tile* currentSpot = &board.GetTile(25 * (position.y / 32) + (position.x / 32));
-                         currentSpot->ToggleFlag();
+                         board.ToggleFlag(currentSpot);
                          nums = Helpers::digitizer(board.GetMineCount() - board.GetFlagCount());
                          for (int i = 0; i < 3; i++)
                              digitDisplay.at(i).setTextureRect(digitRects.at(nums.at(i)));
